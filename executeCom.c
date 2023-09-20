@@ -85,6 +85,7 @@ void execute_single_command(char *command)
 			}
 		}
 	}
+	exit(0);
 }
 
 /**

@@ -1,11 +1,14 @@
 #ifndef SHELL_H
 #define SHELL_H
 
+#define BUFFER_SIZE 1024
+
 extern char **environ;
 
-void tokenize_command(char *command, char *args[]);
-void execute_child(char *args[]);
-void execute_single_command(char *command);
+ssize_t read_input(char **buffer, size_t *size);
+int execute_command(const char *command);
+void interactive_mode(void);
+void non_interactive_mode(int argc, char *argv[]);
 void executeCommand(char *command);
 void executeCommandWithArgs(char *command);
 void executeChildProcess(char *args[]);

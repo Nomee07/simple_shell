@@ -14,5 +14,6 @@ void tokenizeCommand(char *command, char *args[]);
 void executeCommandWithPath(char *command,
 		char *const args[], char *const environ[]);
 int is_builtin_command(const char *command);
+void executeCommandWithExit(char *command);
 
 #endif

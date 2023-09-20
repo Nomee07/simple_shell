@@ -6,6 +6,7 @@
 
 #define MAX_INPUT_SIZE 1024
 
+
 /**
  * main - Entry point of the program
  * Return: 0 on success, or an error code on failure.

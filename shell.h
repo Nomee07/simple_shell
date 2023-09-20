@@ -12,5 +12,6 @@ void handleParentProcess(pid_t pid);
 void tokenizeCommand(char *command, char *args[]);
 void executeCommandWithPath(char *command,
 		char *const args[], char *const environ[]);
+int is_builtin_command(const char *command);
 
 #endif

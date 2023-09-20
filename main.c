@@ -22,7 +22,7 @@ int main(void)
 	while (1)
 	{
 		if (is_interactive)
-			printf(" ");
+			printf("($) ");
 
 	read_bytes = getline(&input, &input_size, stdin);
 	if (read_bytes == -1)

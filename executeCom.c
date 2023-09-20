@@ -99,14 +99,18 @@ void executeCommand(char *command)
 	int i = 0;
 	int j = 0;
 
-	token = strtok(command, "\n");
+	char command_copy[MAX_INPUT_SIZE];
+
+	strncpy(command_copy, command, sizeof(command_copy));
+	command_copy[sizeof(command_copy) - 1] = '\0';
+
+	token = strtok(command_copy, "\n");
 	while (token != NULL)
 	{
 		commands[i++] = token;
 		token = strtok(NULL, "\n");
 	}
 	commands[i] = NULL;
-
 	for (j = 0; j < i; j++)
 	{
 		execute_single_command(commands[j]);

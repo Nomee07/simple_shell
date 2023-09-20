@@ -40,6 +40,9 @@ int main(void)
 
 		executeCommand(input);
 	}
+	free(input);
+	input = NULL;
+
 	if (!is_interactive)
 	break;
 	}

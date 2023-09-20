@@ -5,6 +5,7 @@ extern char **environ;
 
 void tokenize_command(char *command, char *args[]);
 void execute_child(char *args[]);
+void execute_single_command(char *command);
 void executeCommand(char *command);
 void executeCommandWithArgs(char *command);
 void executeChildProcess(char *args[]);

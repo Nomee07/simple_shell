@@ -47,32 +47,31 @@ void execute_child(char *args[])
 
 
 /**
- * executeCommand - Execute a command
+ * execute_single_command - Execute a single command
  * @command: Command to be executed
  */
 
-void executeCommand(char *command)
+void execute_single_command(char *command)
 {
-	pid_t pid;
 	char *args[MAX_ARGS];
+	int status;
+
+	pid_t pid = fork();
 
 	tokenize_command(command, args);
 
-	pid = fork();
 
 	if (pid < 0)
 	{
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}
-
 	if (pid == 0)
 	{
 		execute_child(args);
 	}
 	else
 	{
-		int status;
 
 		waitpid(pid, &status, 0);
 
@@ -84,12 +83,32 @@ void executeCommand(char *command)
 			{
 				fprintf(stderr, "hsh: %s: Exit status %d\n", args[0], exit_status);
 			}
-			else if (WIFSIGNALED(status))
-			{
-				int term_signal = WTERMSIG(status);
-
-				fprintf(stderr, "Child process terminated by signal %d\n", term_signal);
-			}
 		}
+	}
+}
+
+/**
+ * executeCommand - Execute multiple commands separated bt a newline
+ * @command: Commands to be executed
+ */
+
+void executeCommand(char *command)
+{
+	char *commands[MAX_ARGS];
+	char *token;
+	int i = 0;
+	int j = 0;
+
+	token = strtok(command, "\n");
+	while (token != NULL)
+	{
+		commands[i++] = token;
+		token = strtok(NULL, "\n");
+	}
+	commands[i] = NULL;
+
+	for (j = 0; j < i; j++)
+	{
+		execute_single_command(commands[j]);
 	}
 }

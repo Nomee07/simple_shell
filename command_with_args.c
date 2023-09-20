@@ -48,6 +48,7 @@ void tokenizeCommand(char *command, char *args[])
 {
 	char *token = strtok(command, " ");
 	int i = 0;
+	int j = 0;
 
 	while (token != NULL)
 	{
@@ -55,6 +56,12 @@ void tokenizeCommand(char *command, char *args[])
 		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
+	for (j = 0; j < MAX_ARGS; j++)
+	{
+		if (args[j] ==  NULL)
+		break;
+		args[j] = NULL;
+	}
 }
 
 

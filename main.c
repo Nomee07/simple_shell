@@ -36,17 +36,7 @@ int main(void)
 		input[read_bytes - 1] = '\0';
 
 		if (strcmp(input, "exit") == 0)
-		{
-			int exit_status = 0;
-			char* exit_arg = strtok(NULL, " \t\n");
-
-			if (exit_arg != NULL)
-			{
-				exit_status = atoi(exit_arg);
-			}
-			free(input);
-			exit(exit_status);
-		}
+		break;
 
 		executeCommand(input);
 	}

@@ -55,11 +55,11 @@ void execute_single_command(char *command)
 {
 	char *args[MAX_ARGS];
 	int status;
+	int exit_status = WEXITSTATUS(status);
 
 	pid_t pid = fork();
 
 	tokenize_command(command, args);
-
 
 	if (pid < 0)
 	{
@@ -68,6 +68,10 @@ void execute_single_command(char *command)
 	}
 	if (pid == 0)
 	{
+		if (strcmp(args[0], "exit") == 0)
+		{
+			exit(EXIT_SUCCESS);
+		}
 		if (execvp(args[0], args) == -1)
 		{
 			perror("execvp");
@@ -76,21 +80,17 @@ void execute_single_command(char *command)
 	}
 	else
 	{
-
 		waitpid(pid, &status, 0);
-
 		if (WIFEXITED(status))
 		{
-			int exit_status = WEXITSTATUS(status);
-
 			if (exit_status != 0)
 			{
-				fprintf(stderr, "hsh: %s: Exit status %d\n", args[0], exit_status);
+			fprintf(stderr, "hsh: %s: Exit status %d\n", args[0], exit_status);
 			}
 		}
 		else
 		{
-			fprintf(stderr, "hsh: %s: Did not exit normally\n", args[0]);
+		fprintf(stderr, "hsh: %s: Did not exit normally\n", args[0]);
 		}
 	}
 }

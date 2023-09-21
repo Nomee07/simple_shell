@@ -21,12 +21,12 @@ void tokenize_command(char *command, char *args[])
 	char *token;
 	int i = 0;
 
-	token = strtok(command, " \t\n");
+	token = strtok(command, " ");
 
 	while (token != NULL)
 	{
 		args[i++] = token;
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
 }
@@ -68,10 +68,6 @@ void execute_single_command(char *command)
 	}
 	if (pid == 0)
 	{
-		if (strcmp(args[0], "exit") == 0)
-		{
-			exit(EXIT_SUCCESS);
-		}
 		if (execvp(args[0], args) == -1)
 		{
 			perror("execvp");

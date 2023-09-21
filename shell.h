@@ -15,5 +15,8 @@ void executeCommandWithPath(char *command,
 		char *const args[], char *const environ[]);
 int is_builtin_command(const char *command);
 void executeCommandWithExit(char *command);
+int setenv_cmd(const char *variable, const char *value);
+int unsetenv_cmd(const char *variable);
+
 
 #endif

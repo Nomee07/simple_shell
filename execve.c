@@ -7,6 +7,9 @@
 #include <errno.h>
 #include "shell.h"
 
+extern int setenv_cmd(const char *variable, const char *value);
+extern int unsetenv_cmd(const char *variable);
+
 #define MAX_ARGS 64
 #define MAX_INPUT_SIZE 1024
 

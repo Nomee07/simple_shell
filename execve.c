@@ -68,7 +68,11 @@ void execute_single_command(char *command)
 	}
 	if (pid == 0)
 	{
-		execute_child(args);
+		if (execvp(args[0], args) == -1)
+		{
+			perror("execvp");
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
@@ -83,6 +87,10 @@ void execute_single_command(char *command)
 			{
 				fprintf(stderr, "hsh: %s: Exit status %d\n", args[0], exit_status);
 			}
+		}
+		else
+		{
+			fprintf(stderr, "hsh: %s: Did not exit normally\n", args[0]);
 		}
 	}
 }
